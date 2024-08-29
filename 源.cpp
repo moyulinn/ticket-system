@@ -10,135 +10,135 @@
 #include <conio.h>
 using namespace std;
 
-struct Timetable		//³µ´ÎĞÅÏ¢½á¹¹Ìå
+struct Timetable		//è½¦æ¬¡ä¿¡æ¯ç»“æ„ä½“
 {
-	char no[10];//³µ´Î
-	int hour;//·¢³µÊ±¼ä£¨Ê±£©
-	int minute;//·¢³µÊ±¼ä£¨·Ö£©
-	char Starting_station[10];//Ê¼·¢Õ¾
-	char Last_station[10];//ÖÕµãÕ¾
-	float time;//ĞĞ³µÊ±¼ä
-	int fare;  //Æ±¼Û
-	int max_number;//×î´óÔØ¿ÍÊı
-	int sold_number;//ÒÑÊÛÆ±Êı
+	char no[10];//è½¦æ¬¡
+	int hour;//å‘è½¦æ—¶é—´ï¼ˆæ—¶ï¼‰
+	int minute;//å‘è½¦æ—¶é—´ï¼ˆåˆ†ï¼‰
+	char Starting_station[10];//å§‹å‘ç«™
+	char Last_station[10];//ç»ˆç‚¹ç«™
+	float time;//è¡Œè½¦æ—¶é—´
+	int fare;  //ç¥¨ä»·
+	int max_number;//æœ€å¤§è½½å®¢æ•°
+	int sold_number;//å·²å”®ç¥¨æ•°
 };
-struct IDinformation//³Ë¿ÍÉí·İĞÅÏ¢½á¹¹Ìå
+struct IDinformation//ä¹˜å®¢èº«ä»½ä¿¡æ¯ç»“æ„ä½“
 {
-	char name[10];//³Ë¿ÍĞÅÏ¢
-	char ID[20];//³Ë¿ÍID
-	char no1[10];//³Ë¿ÍËù³Ë×øµÄÆû³µºÅ
-	char buydata[40];//³Ë¿Í¹ºÆ±Ê±¼ä£¬ÄêÔÂÈÕÊ±·ÖÃë
+	char name[10];//ä¹˜å®¢ä¿¡æ¯
+	char ID[20];//ä¹˜å®¢ID
+	char no1[10];//ä¹˜å®¢æ‰€ä¹˜åçš„æ±½è½¦å·
+	char buydata[40];//ä¹˜å®¢è´­ç¥¨æ—¶é—´ï¼Œå¹´æœˆæ—¥æ—¶åˆ†ç§’
 };
-//º¯ÊıÔ­ĞÍÉùÃ÷
-void GetPwd(char* pwd);  //¶ÁÈ¡¿ÚÁî
-void Signin(char* password);//µÇÂ¼
-int AddBus(Timetable* timetables, int n);  //Ôö¼Ó³µ´Î
-int find(Timetable* timetables, int n, char* no);  //°´³µ´Î²éÕÒ
-int find(Timetable* timetables, int n, char* Last_station, int* b);  //°´ÖÕµãÕ¾²éÕÒ
-int DelBus(Timetable* timetables, int n);  //É¾³ı³µ´Î
-int AdminWindowSelect();  //¹ÜÀíÔ±Ñ¡Ôñ´°¿Ú
-int MainWindowSelect();  //Ö÷Ñ¡Ôñ´°¿Ú
-int PassagerWindowSelect();  //¹Ë¿ÍÑ¡Ôñ´°¿Ú
-void TicketDelete(Timetable* timetables, int n);  //ÍËÆ±
-int TicketOrder(Timetable* timetables, int n, IDinformation* IDs, int t);   //ÊÛÆ±
-int StopSerive(Timetable* timetables, int n, char* no);  //Í£Ö¹·şÎñ
-void ShowTimetable(Timetable* timetables, int n);   //ÏÔÊ¾ËùÓĞ³µ´Î
-void ShowTitle();   //ÏÔÊ¾±êÌâ
-void ShowBusInfo(Timetable* timetables, int n, int idx);   //ÏÔÊ¾Ò»¸ö³µ´ÎĞÅÏ¢
-int ReadFromFile(Timetable* timetables, char* filename);   //´ÓÎÄ¼şfilename¶Áµ½½á¹¹ÌåÊı×é
-void inttostr(int n, char* str);   //ÕûÊı×ª»»³É×Ö·û´®
-void GenerateLogFileName(char* filename);   //²úÉúÈÕÖ¾ÎÄ¼şÃû
-int WritetoFile(Timetable* timetables, int n, char* filename);  //½«n¸öÔªËØµÄ½á¹¹ÌåÊı×étimetablesĞ´ÈëÎÄ¼şfilename
-int QueryWindowSelect();   //²éÑ¯Ñ¡Ôñ´°¿Ú
-void Query(Timetable* timetables, int n);   //°´³µ´Î»ò°´Ä¿µÄµØ²éÑ¯²¢ÏÔÊ¾
-void AdminMode(Timetable* timetables, char* password, char* filename, IDinformation* IDs);  //¹ÜÀíÔ±Ä£Ê½
-void SortbyTime(Timetable* timetables, int n);   //°´·¢³µÊ±¼äÉıĞòÅÅĞò
-void PassagerMode(Timetable* timetables, IDinformation* IDs, int t, char* filename);  //¹Ë¿ÍÄ£Ê½
-int InitializaionPassageMode(Timetable* timetables, char* LogFileName, char* filename);//ÅĞ¶ÏÈÕÖ¾£¬¶ÁÈ¡ÎÄ¼ş
-void change(char* password);//½øĞĞÃÜÂë¸ü¸Ä
-void passwordstart();//¶ÔÃÜÂë³õÊ¼»¯123
-void passwordin(char* password);//´ÓÎÄ¼ş¶ÁÈ¡Ô­Ê¼ÃÜÂë
-int informationin(IDinformation* IDs);//´ÓÎÄ¼ş¶ÁÈ¡Ö®Ç°ËùÓĞµÄ³Ë¿ÍĞÅÏ¢
-void writeIDs(IDinformation* IDs, int t);//°Ñ³Ë¿ÍÏà¹ØĞÅÏ¢Ğ´ÈëÎÄ¼ş
-void showinformation(IDinformation* IDs);//ÏÔÊ¾ËùÓĞ³Ë¿Í¹ºÆ±ĞÅÏ¢
-void GetPwd(char* pwd)  //¶ÁÈ¡¿ÚÁî£¬²¢½«ÊäÈëµÄ×Ö·û´®×ª»»Îª*ÏÔÊ¾
+//å‡½æ•°åŸå‹å£°æ˜
+void GetPwd(char* pwd);  //è¯»å–å£ä»¤
+void Signin(char* password);//ç™»å½•
+int AddBus(Timetable* timetables, int n);  //å¢åŠ è½¦æ¬¡
+int find(Timetable* timetables, int n, char* no);  //æŒ‰è½¦æ¬¡æŸ¥æ‰¾
+int find(Timetable* timetables, int n, char* Last_station, int* b);  //æŒ‰ç»ˆç‚¹ç«™æŸ¥æ‰¾
+int DelBus(Timetable* timetables, int n);  //åˆ é™¤è½¦æ¬¡
+int AdminWindowSelect();  //ç®¡ç†å‘˜é€‰æ‹©çª—å£
+int MainWindowSelect();  //ä¸»é€‰æ‹©çª—å£
+int PassagerWindowSelect();  //é¡¾å®¢é€‰æ‹©çª—å£
+void TicketDelete(Timetable* timetables, int n);  //é€€ç¥¨
+int TicketOrder(Timetable* timetables, int n, IDinformation* IDs, int t);   //å”®ç¥¨
+int StopSerive(Timetable* timetables, int n, char* no);  //åœæ­¢æœåŠ¡
+void ShowTimetable(Timetable* timetables, int n);   //æ˜¾ç¤ºæ‰€æœ‰è½¦æ¬¡
+void ShowTitle();   //æ˜¾ç¤ºæ ‡é¢˜
+void ShowBusInfo(Timetable* timetables, int n, int idx);   //æ˜¾ç¤ºä¸€ä¸ªè½¦æ¬¡ä¿¡æ¯
+int ReadFromFile(Timetable* timetables, char* filename);   //ä»æ–‡ä»¶filenameè¯»åˆ°ç»“æ„ä½“æ•°ç»„
+void inttostr(int n, char* str);   //æ•´æ•°è½¬æ¢æˆå­—ç¬¦ä¸²
+void GenerateLogFileName(char* filename);   //äº§ç”Ÿæ—¥å¿—æ–‡ä»¶å
+int WritetoFile(Timetable* timetables, int n, char* filename);  //å°†nä¸ªå…ƒç´ çš„ç»“æ„ä½“æ•°ç»„timetableså†™å…¥æ–‡ä»¶filename
+int QueryWindowSelect();   //æŸ¥è¯¢é€‰æ‹©çª—å£
+void Query(Timetable* timetables, int n);   //æŒ‰è½¦æ¬¡æˆ–æŒ‰ç›®çš„åœ°æŸ¥è¯¢å¹¶æ˜¾ç¤º
+void AdminMode(Timetable* timetables, char* password, char* filename, IDinformation* IDs);  //ç®¡ç†å‘˜æ¨¡å¼
+void SortbyTime(Timetable* timetables, int n);   //æŒ‰å‘è½¦æ—¶é—´å‡åºæ’åº
+void PassagerMode(Timetable* timetables, IDinformation* IDs, int t, char* filename);  //é¡¾å®¢æ¨¡å¼
+int InitializaionPassageMode(Timetable* timetables, char* LogFileName, char* filename);//åˆ¤æ–­æ—¥å¿—ï¼Œè¯»å–æ–‡ä»¶
+void change(char* password);//è¿›è¡Œå¯†ç æ›´æ”¹
+void passwordstart();//å¯¹å¯†ç åˆå§‹åŒ–123
+void passwordin(char* password);//ä»æ–‡ä»¶è¯»å–åŸå§‹å¯†ç 
+int informationin(IDinformation* IDs);//ä»æ–‡ä»¶è¯»å–ä¹‹å‰æ‰€æœ‰çš„ä¹˜å®¢ä¿¡æ¯
+void writeIDs(IDinformation* IDs, int t);//æŠŠä¹˜å®¢ç›¸å…³ä¿¡æ¯å†™å…¥æ–‡ä»¶
+void showinformation(IDinformation* IDs);//æ˜¾ç¤ºæ‰€æœ‰ä¹˜å®¢è´­ç¥¨ä¿¡æ¯
+void GetPwd(char* pwd)  //è¯»å–å£ä»¤ï¼Œå¹¶å°†è¾“å…¥çš„å­—ç¬¦ä¸²è½¬æ¢ä¸º*æ˜¾ç¤º
 {
-	cin.sync();//Çå¿ÕcinÊı¾İÁ÷ÀïµÄÄÚÈİ
+	cin.sync();//æ¸…ç©ºcinæ•°æ®æµé‡Œçš„å†…å®¹
 	int i = 0;
 	char ch;
 
 	while (1)
 	{
-		ch = _getch();//ÔÚÍ·ÎÄ¼şconio.hÖĞ£¬´Ó¼üÅÌÉÏ¶ÁÈ¡Ò»¸ö×Ö·û
-		if (ch == '\r')  break; //'\r' ±íÊ¾»Ø³µ¼ü
-		else if (ch == '\b') { cout << "\b \b";   i--; }  //'\b'±íÊ¾ÍË¸ñ¼ü
+		ch = _getch();//åœ¨å¤´æ–‡ä»¶conio.hä¸­ï¼Œä»é”®ç›˜ä¸Šè¯»å–ä¸€ä¸ªå­—ç¬¦
+		if (ch == '\r')  break; //'\r' è¡¨ç¤ºå›è½¦é”®
+		else if (ch == '\b') { cout << "\b \b";   i--; }  //'\b'è¡¨ç¤ºé€€æ ¼é”®
 		else { pwd[i++] = ch;	cout << '*'; }
 	}
 	pwd[i] = '\0';
 	cout << '\n';
 }
-void Signin(char* password)      //¹ÜÀíÔ±µÇÂ¼
+void Signin(char* password)      //ç®¡ç†å‘˜ç™»å½•
 {
-	char ID[20];   //´æ·Å¹ÜÀíÔ±Ãû×Ö
-	char pwd[20];  //´æ·ÅÃÜÂë
-	cin.sync();  //Çå¿ÕcinÊı¾İÁ÷ÀïµÄÄÚÈİ
+	char ID[20];   //å­˜æ”¾ç®¡ç†å‘˜åå­—
+	char pwd[20];  //å­˜æ”¾å¯†ç 
+	cin.sync();  //æ¸…ç©ºcinæ•°æ®æµé‡Œçš„å†…å®¹
 
 	do
 	{
-		cout << "ÊäÈë¹ÜÀíÔ±Ãû×Ö£º";
+		cout << "è¾“å…¥ç®¡ç†å‘˜åå­—ï¼š";
 		cin >> ID;
-		cout << "ÊäÈëÃÜÂë£º";//ÊäÈëÌáÊ¾
-		GetPwd(pwd);//ÊäÈëÃÜÂë²¢×ª»»³É*ºÅ	
+		cout << "è¾“å…¥å¯†ç ï¼š";//è¾“å…¥æç¤º
+		GetPwd(pwd);//è¾“å…¥å¯†ç å¹¶è½¬æ¢æˆ*å·	
 		if (strcmp(ID, "admin") == 0 && strcmp(pwd, password) == 0)
 			break;
 
-		cout << "ÓÃ»§»òÃÜÂë´íÎó£¬ÖØĞÂÊäÈë£º\n";
+		cout << "ç”¨æˆ·æˆ–å¯†ç é”™è¯¯ï¼Œé‡æ–°è¾“å…¥ï¼š\n";
 	} while (1);
 
-	cout << "µÇÂ¼³É¹¦£¡\n";
+	cout << "ç™»å½•æˆåŠŸï¼\n";
 	system("pause");
 }
-int AddBus(Timetable* timetables, int n)     //Ôö¼Ó³µ´Î£¬½«¸ü¸ÄµÄĞÅÏ¢Ìí¼Óµ½ÎÄ¼şÖĞ     
+int AddBus(Timetable* timetables, int n)     //å¢åŠ è½¦æ¬¡ï¼Œå°†æ›´æ”¹çš„ä¿¡æ¯æ·»åŠ åˆ°æ–‡ä»¶ä¸­     
 {
 	char no[10];
-	int k;          //ÕÒµ½ÊäÈëµÄ³µ´ÎºÅ
+	int k;          //æ‰¾åˆ°è¾“å…¥çš„è½¦æ¬¡å·
 	while (1)
 	{
-		cout << "ÇëÊäÈëÒªÌí¼ÓµÄ³µ´ÎºÅ:";
+		cout << "è¯·è¾“å…¥è¦æ·»åŠ çš„è½¦æ¬¡å·:";
 		cin >> no;
-		k = find(timetables, n, no);//ÕÒµ½ÊäÈëµÄ³µ´ÎºÅ
+		k = find(timetables, n, no);//æ‰¾åˆ°è¾“å…¥çš„è½¦æ¬¡å·
 		if (k != -1)
 		{
-			cout << "¸Ã³µ´ÎÒÑ¾­´æÔÚ£¬ÎŞĞèÌí¼Ó£¬ÇëÖØĞÂÊäÈë";
+			cout << "è¯¥è½¦æ¬¡å·²ç»å­˜åœ¨ï¼Œæ— éœ€æ·»åŠ ï¼Œè¯·é‡æ–°è¾“å…¥";
 		}
 		else
 		{
 			strcpy(timetables[n].no, no);
-			cout << "ÇëÊäÈë·¢³µÊ±¼ä£¨Ğ¡Ê±£©:";
+			cout << "è¯·è¾“å…¥å‘è½¦æ—¶é—´ï¼ˆå°æ—¶ï¼‰:";
 			cin >> timetables[n].hour;
-			cout << "ÇëÊäÈë·¢³µÊ±¼ä£¨·ÖÖÓ£©:";
+			cout << "è¯·è¾“å…¥å‘è½¦æ—¶é—´ï¼ˆåˆ†é’Ÿï¼‰:";
 			cin >> timetables[n].minute;
-			cout << "ÇëÊäÈëÊ¼·¢Õ¾:";
+			cout << "è¯·è¾“å…¥å§‹å‘ç«™:";
 			cin >> timetables[n].Starting_station;
-			cout << "ÇëÊäÈëÖÕµãÕ¾:";
+			cout << "è¯·è¾“å…¥ç»ˆç‚¹ç«™:";
 			cin >> timetables[n].Last_station;
-			cout << "ÇëÊäÈëĞĞ³µÊ±¼ä:";
+			cout << "è¯·è¾“å…¥è¡Œè½¦æ—¶é—´:";
 			cin >> timetables[n].time;
-			cout << "ÇëÊäÈëÆ±¼Û:";
+			cout << "è¯·è¾“å…¥ç¥¨ä»·:";
 			cin >> timetables[n].fare;
-			cout << "ÇëÊäÈë×î´óÔØ¿ÍÊı:";
+			cout << "è¯·è¾“å…¥æœ€å¤§è½½å®¢æ•°:";
 			cin >> timetables[n].max_number;
-			cout << "ÇëÊäÈëÒÑÊÛÆ±Êı:";
+			cout << "è¯·è¾“å…¥å·²å”®ç¥¨æ•°:";
 			cin >> timetables[n].sold_number;
-			cout << "Ôö¼Ó³É¹¦";
+			cout << "å¢åŠ æˆåŠŸ";
 			break;
 		}
 	}
-	return (n + 1);//·µ»ØÔö¼ÓÁËÒ»ÌË³µºóÏÖÓĞµÄ³µÁ¾Êı
+	return (n + 1);//è¿”å›å¢åŠ äº†ä¸€è¶Ÿè½¦åç°æœ‰çš„è½¦è¾†æ•°
 }
-int find(Timetable* timetables, int n, char* no)	  //°´³µ´Î²éÕÒ
+int find(Timetable* timetables, int n, char* no)	  //æŒ‰è½¦æ¬¡æŸ¥æ‰¾
 {
-	int i = 0, k=1;//iÊÇ¼ÆÊı£¬kÊÇÅĞ¶ÏÁ½³µ´ÎºÅÊÇ·ñÒ»ÖÂ
+	int i = 0, k=1;//iæ˜¯è®¡æ•°ï¼Œkæ˜¯åˆ¤æ–­ä¸¤è½¦æ¬¡å·æ˜¯å¦ä¸€è‡´
 	for (i = 0; i < n; i++)
 	{
 		k = strcmp(timetables[i].no, no);
@@ -149,131 +149,94 @@ int find(Timetable* timetables, int n, char* no)	  //°´³µ´Î²éÕÒ
 	}
 	if (k == 0)
 	{
-		return i;//·µ»ØÁ½³µ´ÎºÅÒ»ÖÂµÄ³µ´ÎËùÔÚµÄÎ»ÖÃ
+		return i;//è¿”å›ä¸¤è½¦æ¬¡å·ä¸€è‡´çš„è½¦æ¬¡æ‰€åœ¨çš„ä½ç½®
 	}
 	else
 	{
-		return -1;//·µ»Ø-1£¬±íÊ¾Î´ÕÒµ½
+		return -1;//è¿”å›-1ï¼Œè¡¨ç¤ºæœªæ‰¾åˆ°
 	}
 }
-int find(Timetable* timetables, int n, char* Last_station, int* b)  //°´ÖÕµãÕ¾²éÕÒ  
+int find(Timetable* timetables, int n, char* Last_station, int* b)  //æŒ‰ç»ˆç‚¹ç«™æŸ¥æ‰¾  
 {
-	int j = 0;  //´æ·ÅÍ¬Ò»ÖÕµãÕ¾³µ´ÎÊı
-	int i = 0, k;//iÊÇ¼ÆÊı£¬kÊÇÅĞ¶ÏÁ½³µ´ÎºÅÊÇ·ñÒ»ÖÂ
+	int j = 0;  //å­˜æ”¾åŒä¸€ç»ˆç‚¹ç«™è½¦æ¬¡æ•°
+	int i = 0, k;//iæ˜¯è®¡æ•°ï¼Œkæ˜¯åˆ¤æ–­ä¸¤è½¦æ¬¡å·æ˜¯å¦ä¸€è‡´
 	for (i = 0; i < n; i++)
 	{
 		k = strcmp(timetables[i].Last_station, Last_station);
 		if (k == 0)
 		{
-			b[j] = i;//¼ÇÂ¼ËùÓĞ·ûºÏµÄ³µ´ÎËùÔÚÎ»ÖÃ
+			b[j] = i;//è®°å½•æ‰€æœ‰ç¬¦åˆçš„è½¦æ¬¡æ‰€åœ¨ä½ç½®
 			j++;
 		}
 	}
-	if (j > 0) return j;//·µ»Ø·ûºÏÌõ¼şµÄ³µ´Î¸öÊı
+	if (j > 0) return j;//è¿”å›ç¬¦åˆæ¡ä»¶çš„è½¦æ¬¡ä¸ªæ•°
 
-	return -1; //Ã»ÓĞ²éµ½ÏàÓ¦ÖÕµãÕ¾µÄ³µ´ÎÊ±·µ»ØÖµ-1
+	return -1; //æ²¡æœ‰æŸ¥åˆ°ç›¸åº”ç»ˆç‚¹ç«™çš„è½¦æ¬¡æ—¶è¿”å›å€¼-1
 }
-int DelBus(Timetable* timetables, int n)   //É¾³ı³µ´Î,²¢¸üĞÂ³µ´ÎÎÄ¼ş
+int DelBus(Timetable* timetables, int n)   //åˆ é™¤è½¦æ¬¡,å¹¶æ›´æ–°è½¦æ¬¡æ–‡ä»¶
 {
 	char no[10];
 	int t, i;
 	while (1)
 	{
-		cout << "ÇëÊäÈëÄãÒªÉ¾³ıµÄ³µ´ÎºÅ:";
+		cout << "è¯·è¾“å…¥ä½ è¦åˆ é™¤çš„è½¦æ¬¡å·:";
 		cin >> no;
 		t = find(timetables, n, no);
 		if (t == -1)
 		{
-			cout << "´Ë³µÁ¾²»´æÔÚ£¬É¾³ı´íÎó,ÇëÖØĞÂÊäÈë" << endl;;
+			cout << "æ­¤è½¦è¾†ä¸å­˜åœ¨ï¼Œåˆ é™¤é”™è¯¯,è¯·é‡æ–°è¾“å…¥" << endl;;
 			break;
 		}
-		if (t == n - 1)//ÈôÎªÎ»ÖÃÔÚ×îºó£¬ÔòÒÔ×Ü³µ´ÎÊı¼õÒ»±íÊ¾É¾³ı³µ´Î
+		if (t == n - 1)//è‹¥ä¸ºä½ç½®åœ¨æœ€åï¼Œåˆ™ä»¥æ€»è½¦æ¬¡æ•°å‡ä¸€è¡¨ç¤ºåˆ é™¤è½¦æ¬¡
 		{
 			n = n - 1;
-			cout << "É¾³ı³É¹¦" << endl;
+			cout << "åˆ é™¤æˆåŠŸ" << endl;
 			break;
 		}
 		if (t < n - 1 && t >= 0)
 		{
 			for (i = t; i < n - 1; i++)
 			{
-				timetables[i] = timetables[i + 1];//ÈôÎ»ÖÃ²»ÔÚ×îºó£¬ÔòÖ®ºóËùÓĞ³µ´ÎÎ»ÖÃÍùÇ°1Î»
+				timetables[i] = timetables[i + 1];//è‹¥ä½ç½®ä¸åœ¨æœ€åï¼Œåˆ™ä¹‹åæ‰€æœ‰è½¦æ¬¡ä½ç½®å¾€å‰1ä½
 			}
 			n = n - 1;
-			cout << "É¾³ı³É¹¦£¡" << endl;
+			cout << "åˆ é™¤æˆåŠŸï¼" << endl;
 			break;
 		}
 	}
-	return n;//·µ»ØÏÖÓĞ³µ´ÎÊıÁ¿
+	return n;//è¿”å›ç°æœ‰è½¦æ¬¡æ•°é‡
 }
-int AdminWindowSelect() 				//¹ÜÀíÔ±²Ëµ¥½çÃæ
+int AdminWindowSelect() 				//ç®¡ç†å‘˜èœå•ç•Œé¢
 {
-	int num;//±íÊ¾Ñ¡ÔñµÄÑ¡Ïî
+	int num;//è¡¨ç¤ºé€‰æ‹©çš„é€‰é¡¹
 	while (1)
 	{
 		system("cls");
-		cout << "\n                *********** ¹ÜÀíÔ±¹¦ÄÜ ***************\n\n";
-		cout << "                           1¡¢Ôö¼Ó³µ´ÎĞÅÏ¢\n";
-		cout << "                           2¡¢³µ´ÎĞÅÏ¢ä¯ÀÀ\n";
-		cout << "                           3¡¢³µ´ÎĞÅÏ¢²éÑ¯\n";
-		cout << "                           4¡¢×¢Ïú³µ´ÎĞÅÏ¢\n";
-		cout << "                           5¡¢²é¿´ËùÓĞ³Ë¿Í¹ºÆ±ĞÅÏ¢(ÓĞbug)\n";
-		cout << "                           6¡¢¸ü¸ÄÃÜÂë\n";
-		cout << "                           7¡¢·µ»Ø\n";
+		cout << "\n                *********** ç®¡ç†å‘˜åŠŸèƒ½ ***************\n\n";
+		cout << "                           1ã€å¢åŠ è½¦æ¬¡ä¿¡æ¯\n";
+		cout << "                           2ã€è½¦æ¬¡ä¿¡æ¯æµè§ˆ\n";
+		cout << "                           3ã€è½¦æ¬¡ä¿¡æ¯æŸ¥è¯¢\n";
+		cout << "                           4ã€æ³¨é”€è½¦æ¬¡ä¿¡æ¯\n";
+		cout << "                           5ã€æŸ¥çœ‹æ‰€æœ‰ä¹˜å®¢è´­ç¥¨ä¿¡æ¯(æœ‰bug)\n";
+		cout << "                           6ã€æ›´æ”¹å¯†ç \n";
+		cout << "                           7ã€è¿”å›\n";
 		cout << "\n                **************************************\n";
-		cout << "                  ÇëÑ¡Ôñ(1-7): ";
+		cout << "                  è¯·é€‰æ‹©(1-7): ";
 		cin.sync();
 		cin >> num;
 		if (num >= 1 && num <= 7)
 			break;
 	}
-	return num;//·µ»ØÑ¡ÖĞµÄÑ¡ÏîºÅ
+	return num;//è¿”å›é€‰ä¸­çš„é€‰é¡¹å·
 }
-int MainWindowSelect()  //Ö÷´°¿Ú²Ëµ¥
-{
-	int num;//±íÊ¾Ñ¡ÔñµÄÑ¡Ïî
-	while (1)
-	{
-		system("cls");
-		cout << "\n               *********** »¶Ó­Ê¹ÓÃ³µÆ±¹ÜÀíÏµÍ³ ***********\n\n";
-		cout << "                              1.¹ÜÀíÔ±¹¦ÄÜ\n";
-		cout << "                              2.¹Ë¿Í¹¦ÄÜ\n";
-		cout << "                              3.ÍË³ö\n";
-		cout << "\n               ********************************************\n";
-		cout << "               ÇëÑ¡Ôñ(1-3): ";
-		cin >> num;
-		if (num >= 1 && num <= 3)
-			break;
-	}
-	return num;//·µ»ØÑ¡ÖĞµÄÑ¡ÏîºÅ
-}
-int PassagerWindowSelect()    //¹Ë¿Í¹¦ÄÜ
-{
-	int num;//±íÊ¾Ñ¡ÔñµÄÑ¡Ïî
-	while (1)
-	{
-		system("cls");
-		cout << "\n                ************** ¹Ë¿Í¹¦ÄÜ **************\n\n";
-		cout << "                            1¡¢³µ´ÎĞÅÏ¢²éÑ¯\n";
-		cout << "                            2¡¢¹º        Æ±\n";
-		cout << "                            3¡¢ÍË        Æ±\n";
-		cout << "                            4¡¢·µ        »Ø\n";
-		cout << "\n                **************************************\n";
-		cout << "                  ÇëÑ¡Ôñ(1-4): ";
-		cin >> num;
-		if (num >= 1 && num <= 4)
-			break;
-	}
-	return num;//·µ»ØÑ¡ÖĞµÄÑ¡ÏîºÅ
-}
-void TicketDelete(Timetable* timetables, int n)   //ÍËÆ±
+void TicketDelete(Timetable* timetables, int n)   //é€€ç¥¨
 {
 	char no[10];
-	int k;//ÕÒµ½µÄ³µ´ÎÎ»ÖÃ
+	int k;//æ‰¾åˆ°çš„è½¦æ¬¡ä½ç½®
 	system("cls");
 	while (1)
 	{
-		cout << "ÇëÊäÈëÄãËùÒªÍËÆ±µÄ³µ´Î(ÊäÈë0·µ»ØÉÏÒ»²ã)";
+		cout << "è¯·è¾“å…¥ä½ æ‰€è¦é€€ç¥¨çš„è½¦æ¬¡(è¾“å…¥0è¿”å›ä¸Šä¸€å±‚)";
 		cin >> no;
 		if (no[0] == '0' && no[1] == '\0')
 		{
@@ -282,44 +245,81 @@ void TicketDelete(Timetable* timetables, int n)   //ÍËÆ±
 		k = find(timetables, n, no);
 		if (k == -1)
 		{
-			cout << "¸Ã³µ´Î²»´æÔÚ£¬ÇëÖØĞÂÊäÈë";
+			cout << "è¯¥è½¦æ¬¡ä¸å­˜åœ¨ï¼Œè¯·é‡æ–°è¾“å…¥";
 		}
 		if (k >= 0)
 		{
-			ShowTitle();//ÏÔÊ¾Ïà¹ØĞÅÏ¢
+			ShowTitle();//æ˜¾ç¤ºç›¸å…³ä¿¡æ¯
 			ShowBusInfo(timetables, n, k);
-			int s;//ÅĞ¶ÏÊ±¼ä£¬ÊÇ·ñÄÜÍËÆ±
+			int s;//åˆ¤æ–­æ—¶é—´ï¼Œæ˜¯å¦èƒ½é€€ç¥¨
 			s = StopSerive(timetables, n, no);
 			if (s == 1)
 			{
-				cout << "¸Ã°à³µÒÑÍ£Ö¹ÍËÆ±,ÎŞ·¨ÍËÆ±!";
+				cout << "è¯¥ç­è½¦å·²åœæ­¢é€€ç¥¨,æ— æ³•é€€ç¥¨!";
 				break;
 			}
-			cout << "ÊäÈëÍË¶©µÄÆ±Êı";
+			cout << "è¾“å…¥é€€è®¢çš„ç¥¨æ•°";
 			int ticket;
-			cin >> ticket;//ÍË¶©µÄ³µÆ±Êı
+			cin >> ticket;//é€€è®¢çš„è½¦ç¥¨æ•°
 			if (ticket > timetables[k].sold_number)
 			{
-				cout << "ÍËÆ±Êı´óÓÚÒÑÊÛÆ±Êı£¬ÇëÖØĞÂÈ·ÈÏÍËÆ±Êı";
+				cout << "é€€ç¥¨æ•°å¤§äºå·²å”®ç¥¨æ•°ï¼Œè¯·é‡æ–°ç¡®è®¤é€€ç¥¨æ•°";
 				break;
 			}
 			if (ticket <= timetables[k].sold_number)
 			{
 				timetables[k].sold_number = timetables[k].sold_number - ticket;
-				cout << "³µ´ÎÎª" << timetables[k].no << "ÍËÆ±³É¹¦" << endl;
+				cout << "è½¦æ¬¡ä¸º" << timetables[k].no << "é€€ç¥¨æˆåŠŸ" << endl;
 				break;
 			}
 		}
 	}
 }
-int TicketOrder(Timetable* timetables, int n, IDinformation* IDs, int t)  //¹ºÆ±    
+int MainWindowSelect()  //ä¸»çª—å£èœå•
+{
+	int num;//è¡¨ç¤ºé€‰æ‹©çš„é€‰é¡¹
+	while (1)
+	{
+		system("cls");
+		cout << "\n               *********** æ¬¢è¿ä½¿ç”¨è½¦ç¥¨ç®¡ç†ç³»ç»Ÿ ***********\n\n";
+		cout << "                              1.ç®¡ç†å‘˜åŠŸèƒ½\n";
+		cout << "                              2.é¡¾å®¢åŠŸèƒ½\n";
+		cout << "                              3.é€€å‡º\n";
+		cout << "\n               ********************************************\n";
+		cout << "               è¯·é€‰æ‹©(1-3): ";
+		cin >> num;
+		if (num >= 1 && num <= 3)
+			break;
+	}
+	return num;//è¿”å›é€‰ä¸­çš„é€‰é¡¹å·
+}
+int PassagerWindowSelect()    //é¡¾å®¢åŠŸèƒ½
+{
+	int num;//è¡¨ç¤ºé€‰æ‹©çš„é€‰é¡¹
+	while (1)
+	{
+		system("cls");
+		cout << "\n                ************** é¡¾å®¢åŠŸèƒ½ **************\n\n";
+		cout << "                            1ã€è½¦æ¬¡ä¿¡æ¯æŸ¥è¯¢\n";
+		cout << "                            2ã€è´­        ç¥¨\n";
+		cout << "                            3ã€é€€        ç¥¨\n";
+		cout << "                            4ã€è¿”        å›\n";
+		cout << "\n                **************************************\n";
+		cout << "                  è¯·é€‰æ‹©(1-4): ";
+		cin >> num;
+		if (num >= 1 && num <= 4)
+			break;
+	}
+	return num;//è¿”å›é€‰ä¸­çš„é€‰é¡¹å·
+}
+void TicketDelete(Timetable* timetables, int n)   //é€€ç¥¨
 {
 	char no[10];
-	int k;//ÕÒµ½³µ´ÎÎ»ÖÃ
+	int k;//æ‰¾åˆ°çš„è½¦æ¬¡ä½ç½®
 	system("cls");
 	while (1)
 	{
-		cout << "ÇëÊäÈëÄãËùÒª¹ºÂòµÄ³µ´Î(ÊäÈë0·µ»ØÉÏÒ»²ã)";
+		cout << "è¯·è¾“å…¥ä½ æ‰€è¦é€€ç¥¨çš„è½¦æ¬¡(è¾“å…¥0è¿”å›ä¸Šä¸€å±‚)";
 		cin >> no;
 		if (no[0] == '0' && no[1] == '\0')
 		{
@@ -328,77 +328,123 @@ int TicketOrder(Timetable* timetables, int n, IDinformation* IDs, int t)  //¹ºÆ±
 		k = find(timetables, n, no);
 		if (k == -1)
 		{
-			cout << "¸Ã³µ´Î²»´æÔÚ£¬ÇëÖØĞÂÊäÈë";
+			cout << "è¯¥è½¦æ¬¡ä¸å­˜åœ¨ï¼Œè¯·é‡æ–°è¾“å…¥";
+		}
+		if (k >= 0)
+		{
+			ShowTitle();//æ˜¾ç¤ºç›¸å…³ä¿¡æ¯
+			ShowBusInfo(timetables, n, k);
+			int s;//åˆ¤æ–­æ—¶é—´ï¼Œæ˜¯å¦èƒ½é€€ç¥¨
+			s = StopSerive(timetables, n, no);
+			if (s == 1)
+			{
+				cout << "è¯¥ç­è½¦å·²åœæ­¢é€€ç¥¨,æ— æ³•é€€ç¥¨!";
+				break;
+			}
+			cout << "è¾“å…¥é€€è®¢çš„ç¥¨æ•°";
+			int ticket;
+			cin >> ticket;//é€€è®¢çš„è½¦ç¥¨æ•°
+			if (ticket > timetables[k].sold_number)
+			{
+				cout << "é€€ç¥¨æ•°å¤§äºå·²å”®ç¥¨æ•°ï¼Œè¯·é‡æ–°ç¡®è®¤é€€ç¥¨æ•°";
+				break;
+			}
+			if (ticket <= timetables[k].sold_number)
+			{
+				timetables[k].sold_number = timetables[k].sold_number - ticket;
+				cout << "è½¦æ¬¡ä¸º" << timetables[k].no << "é€€ç¥¨æˆåŠŸ" << endl;
+				break;
+			}
+		}
+	}
+}
+int TicketOrder(Timetable* timetables, int n, IDinformation* IDs, int t)  //è´­ç¥¨    
+{
+	char no[10];
+	int k;//æ‰¾åˆ°è½¦æ¬¡ä½ç½®
+	system("cls");
+	while (1)
+	{
+		cout << "è¯·è¾“å…¥ä½ æ‰€è¦è´­ä¹°çš„è½¦æ¬¡(è¾“å…¥0è¿”å›ä¸Šä¸€å±‚)";
+		cin >> no;
+		if (no[0] == '0' && no[1] == '\0')
+		{
+			break;
+		}
+		k = find(timetables, n, no);
+		if (k == -1)
+		{
+			cout << "è¯¥è½¦æ¬¡ä¸å­˜åœ¨ï¼Œè¯·é‡æ–°è¾“å…¥";
 		}
 		if (k >= 0)
 		{
 			ShowTitle();
-			ShowBusInfo(timetables, n, k);//ÏÔÊ¾Ïà¹Ø³µ´Î
+			ShowBusInfo(timetables, n, k);//æ˜¾ç¤ºç›¸å…³è½¦æ¬¡
 			int s;
-			s = StopSerive(timetables, n, no);//ÅĞ¶ÏÊ±¼ä£¬ÊÇ·ñÄÜÍËÆ±
+			s = StopSerive(timetables, n, no);//åˆ¤æ–­æ—¶é—´ï¼Œæ˜¯å¦èƒ½é€€ç¥¨
 			if (s == 1)
 			{
-				cout << "¸Ã³µ´ÎÆ±ÒÑÊÛÍê»òÒÑÍ£Ö¹ÊÛÆ±!";
+				cout << "è¯¥è½¦æ¬¡ç¥¨å·²å”®å®Œæˆ–å·²åœæ­¢å”®ç¥¨!";
 				break;
 			}
-			cout << "ÊäÈë¹ºÂòÆ±Êı";
+			cout << "è¾“å…¥è´­ä¹°ç¥¨æ•°";
 			int ticket;
-			cin >> ticket;//¹ºÂò³µÆ±Êı
+			cin >> ticket;//è´­ä¹°è½¦ç¥¨æ•°
 			if (ticket > (timetables[k].max_number - timetables[k].sold_number))
 			{
-				cout << "³µÆ±²»×ã";
+				cout << "è½¦ç¥¨ä¸è¶³";
 				break;
 			}
 			if (ticket <= (timetables[k].max_number - timetables[k].sold_number))
 			{
 				timetables[k].sold_number = timetables[k].sold_number + ticket;
-				for (int j = 1; j <= ticket; j++)//½øĞĞ³Ë¿ÍĞÅÏ¢²éÑ¯
+				for (int j = 1; j <= ticket; j++)//è¿›è¡Œä¹˜å®¢ä¿¡æ¯æŸ¥è¯¢
 				{
-					cout << "ÇëÊäÈë³Ë¿Í" << j << "µÄÉí·İĞÅÏ¢£º" << endl;
-					cout << "ĞÕÃû£º";
+					cout << "è¯·è¾“å…¥ä¹˜å®¢" << j << "çš„èº«ä»½ä¿¡æ¯ï¼š" << endl;
+					cout << "å§“åï¼š";
 					cin >> IDs[t].name;
-					cout << "IDºÅÂë£º";
+					cout << "IDå·ç ï¼š";
 					cin >> IDs[t].ID;
 					strcpy(IDs[t].no1, no);
 					t++;
 				}
-				cout << "³µ´ÎÎª" << timetables[k].no << "¹ºÆ±³É¹¦" << endl;
+				cout << "è½¦æ¬¡ä¸º" << timetables[k].no << "è´­ç¥¨æˆåŠŸ" << endl;
 				break;
 			}
 		}
 	}
-	return t;//·µ»ØÔö¼ÓºóÎÄ¼şº¬ÓĞµÄ³Ë¿ÍĞÅÏ¢Êı
+	return t;//è¿”å›å¢åŠ åæ–‡ä»¶å«æœ‰çš„ä¹˜å®¢ä¿¡æ¯æ•°
 }
-int StopSerive(Timetable* timetables, int n, char* no) //ÅĞ¶ÏÊÇ·ñÍ£Ö¹ÊÛÆ±»òÍËÆ±£¬0:¿ÉÒÔ£¬1£º²»¿ÉÒÔ   
+int StopSerive(Timetable* timetables, int n, char* no) //åˆ¤æ–­æ˜¯å¦åœæ­¢å”®ç¥¨æˆ–é€€ç¥¨ï¼Œ0:å¯ä»¥ï¼Œ1ï¼šä¸å¯ä»¥   
 {
-	struct tm* local;       //struct tm Ê±¼ä½á¹¹ÌåÀàĞÍ
-	time_t t;				//°Ñµ±Ç°Ê±¼ä¸øt
+	struct tm* local;       //struct tm æ—¶é—´ç»“æ„ä½“ç±»å‹
+	time_t t;				//æŠŠå½“å‰æ—¶é—´ç»™t
 	t = time(NULL);
-	local = localtime(&t);      //»ñÈ¡µ±Ç°ÏµÍ³Ê±¼ä 
+	local = localtime(&t);      //è·å–å½“å‰ç³»ç»Ÿæ—¶é—´ 
 	int i = find(timetables, n, no);
 
 	if ((local->tm_hour * 60 + local->tm_min) + 10 < (timetables[i].hour * 60 + timetables[i].minute))
 		return 0;
 	return 1;
 }
-void ShowTimetable(Timetable* timetables, int n)    //ÏÔÊ¾È«²¿³µ´ÎĞÅÏ¢
+void ShowTimetable(Timetable* timetables, int n)    //æ˜¾ç¤ºå…¨éƒ¨è½¦æ¬¡ä¿¡æ¯
 {
 	int i = 0;
-	SortbyTime(timetables, n);//¶Ô·¢³µÊ±¼ä½øĞĞÅÅĞò
+	SortbyTime(timetables, n);//å¯¹å‘è½¦æ—¶é—´è¿›è¡Œæ’åº
 	ShowTitle();
 	for (i = 0; i < n; i++)
 	{
-		ShowBusInfo(timetables, n, i);//ÏÔÊ¾³µ´ÎĞÅÏ¢
+		ShowBusInfo(timetables, n, i);//æ˜¾ç¤ºè½¦æ¬¡ä¿¡æ¯
 	}
 
 }
-void ShowTitle() //ÏÔÊ¾³µ´Î±êÌâ
+void ShowTitle() //æ˜¾ç¤ºè½¦æ¬¡æ ‡é¢˜
 {
 	system("cls");
-	cout << "\n\n***************************** ³µ´ÎĞÅÏ¢ *********************************\n";
-	cout << "\n°à´Î\tÊ±¼ä\tÆğµã\tÖÕµã\tÊ±³¤\tÆ±¼Û\t¶î¶¨Á¿\tÒÑÊÛÆ±\tÊÇ·ñ·¢³µ\n\n";
+	cout << "\n\n***************************** è½¦æ¬¡ä¿¡æ¯ *********************************\n";
+	cout << "\nç­æ¬¡\tæ—¶é—´\tèµ·ç‚¹\tç»ˆç‚¹\tæ—¶é•¿\tç¥¨ä»·\té¢å®šé‡\tå·²å”®ç¥¨\tæ˜¯å¦å‘è½¦\n\n";
 }
-void ShowBusInfo(Timetable* timetables, int n, int idx)   //ÏÔÊ¾µÚidx³µ´ÎĞÅÏ¢   
+void ShowBusInfo(Timetable* timetables, int n, int idx)   //æ˜¾ç¤ºç¬¬idxè½¦æ¬¡ä¿¡æ¯   
 {
 	cout << timetables[idx].no << '\t';
 	cout << timetables[idx].hour << ':';
@@ -410,32 +456,32 @@ void ShowBusInfo(Timetable* timetables, int n, int idx)   //ÏÔÊ¾µÚidx³µ´ÎĞÅÏ¢
 	cout << timetables[idx].max_number << '\t';
 	cout << timetables[idx].sold_number << '\t';
 	{
-		//ÅĞ¶ÏÊÇ·ñ·¢³µ
-		struct tm* local;       //struct tm Ê±¼ä½á¹¹ÌåÀàĞÍ
-		time_t t;				//°Ñµ±Ç°Ê±¼ä¸øt
+		//åˆ¤æ–­æ˜¯å¦å‘è½¦
+		struct tm* local;       //struct tm æ—¶é—´ç»“æ„ä½“ç±»å‹
+		time_t t;				//æŠŠå½“å‰æ—¶é—´ç»™t
 		t = time(NULL);
-		local = localtime(&t);      //»ñÈ¡µ±Ç°ÏµÍ³Ê±¼ä 
+		local = localtime(&t);      //è·å–å½“å‰ç³»ç»Ÿæ—¶é—´ 
 		if ((local->tm_hour * 60 + local->tm_min) < (timetables[idx].hour * 60 + timetables[idx].minute))
 		{
-			cout << "Î´·¢³µ" << '\t';
+			cout << "æœªå‘è½¦" << '\t';
 		}
 		else
 		{
-			cout << "ÒÑ·¢³µ" << '\t';
+			cout << "å·²å‘è½¦" << '\t';
 		}
 	}
 	cout << endl;
 }
-int ReadFromFile(Timetable* timetables, char* filename)//´ÓÎÄ¼ş¶ÁÈ¡³µ´ÎĞÅÏ¢
+int ReadFromFile(Timetable* timetables, char* filename)//ä»æ–‡ä»¶è¯»å–è½¦æ¬¡ä¿¡æ¯
 {
-	int i = 0;  //³µ´ÎÊıÁ¿
+	int i = 0;  //è½¦æ¬¡æ•°é‡
 	ifstream infile;
 	infile.open(filename);
 	if (!infile)
 	{
-		cout << "ÎÄ¼ş´ò¿ª´íÎó";
+		cout << "æ–‡ä»¶æ‰“å¼€é”™è¯¯";
 		system("pause");
-		return (-1);//·µ»Ø-1±íÊ¾´íÎó
+		return (-1);//è¿”å›-1è¡¨ç¤ºé”™è¯¯
 		exit(1);
 	}
 	else
@@ -453,22 +499,22 @@ int ReadFromFile(Timetable* timetables, char* filename)//´ÓÎÄ¼ş¶ÁÈ¡³µ´ÎĞÅÏ¢
 			infile >> timetables[i].sold_number;
 			i++;
 		}
-		return i;//·µ»ØÏÖÓĞ³µ´ÎµÄÊıÁ¿
+		return i;//è¿”å›ç°æœ‰è½¦æ¬¡çš„æ•°é‡
 	}
 	infile.close();
 }
-void inttostr(int n, char* str) //½«Êı×Ö×ª»»³É×Ö·û´®
+void inttostr(int n, char* str) //å°†æ•°å­—è½¬æ¢æˆå­—ç¬¦ä¸²
 {
 	/*int k;
  int i=0,t,j=0;
 	while(n!=0)
 	{
 	t=n%10;
-	str[j]=t+48;//Í¨¹ıASCII½øĞĞÊı×ÖÓë×Ö·û×ª»¯
+	str[j]=t+48;//é€šè¿‡ASCIIè¿›è¡Œæ•°å­—ä¸å­—ç¬¦è½¬åŒ–
 	j++;
 	n=n/10;
 	}
-	str[j]='\0';//×Ö·û´®½áÎ²±ØĞëÒªÓĞ¡®\0¡¯·ñÔò»áÓĞÂÒÂë
+	str[j]='\0';//å­—ç¬¦ä¸²ç»“å°¾å¿…é¡»è¦æœ‰â€˜\0â€™å¦åˆ™ä¼šæœ‰ä¹±ç 
 	j--;
 	for(i=0;i<=j;i++,j--)
 	{
@@ -476,28 +522,28 @@ void inttostr(int n, char* str) //½«Êı×Ö×ª»»³É×Ö·û´®
 	str[i]=str[j];
 	str[j]=k;
 	}*/
-	_itoa(n, str, 10);//itoaº¯Êı£¬½«Êı×Ö×ª»¯Îª×Ö·û´®£¬ÊÊµ±Ê¹ÓÃ¿âº¯Êı¿ÉÒÔ½ÚÊ¡³ÌĞò´úÂëÊı¡£µ«ÉÏ·½¸ø³öÁË·Çº¯ÊıÊµÏÖ·½Ê½
+	_itoa(n, str, 10);//itoaå‡½æ•°ï¼Œå°†æ•°å­—è½¬åŒ–ä¸ºå­—ç¬¦ä¸²ï¼Œé€‚å½“ä½¿ç”¨åº“å‡½æ•°å¯ä»¥èŠ‚çœç¨‹åºä»£ç æ•°ã€‚ä½†ä¸Šæ–¹ç»™å‡ºäº†éå‡½æ•°å®ç°æ–¹å¼
 }
-void GenerateLogFileName(char* filename)  //Éú³ÉÈÕÖ¾ÎÄ¼şµÄÎÄ¼şÃû
+void GenerateLogFileName(char* filename)  //ç”Ÿæˆæ—¥å¿—æ–‡ä»¶çš„æ–‡ä»¶å
 {
 	filename[0] = '\0';
-	struct tm* local;				//Ê±¼ä½á¹¹Ìå 
-	time_t t;                       //°Ñµ±Ç°Ê±¼ä¸øt
-	t = time(NULL);					//NULLÔÚstdio.hÖĞ¶¨ÒåÎª0
-	local = localtime(&t);			//»ñÈ¡µ±Ç°ÏµÍ³Ê±¼ä 
+	struct tm* local;				//æ—¶é—´ç»“æ„ä½“ 
+	time_t t;                       //æŠŠå½“å‰æ—¶é—´ç»™t
+	t = time(NULL);					//NULLåœ¨stdio.hä¸­å®šä¹‰ä¸º0
+	local = localtime(&t);			//è·å–å½“å‰ç³»ç»Ÿæ—¶é—´ 
 
-	char year[5], month[3], day[3];	//½«ÄêÔÂÈÕ·Ö±ğ×ª»»³É×Ö·û´®ĞÍ
+	char year[5], month[3], day[3];	//å°†å¹´æœˆæ—¥åˆ†åˆ«è½¬æ¢æˆå­—ç¬¦ä¸²å‹
 	inttostr(1900 + local->tm_year, year);
 	inttostr(1 + local->tm_mon, month);
 	inttostr(local->tm_mday, day);
-	strcat(filename, year);			//Éú³ÉÈÕÖ¾ÎÄ¼şÃû
+	strcat(filename, year);			//ç”Ÿæˆæ—¥å¿—æ–‡ä»¶å
 	strcat(filename, "-");
 	strcat(filename, month);
 	strcat(filename, "-");
 	strcat(filename, day);
 	strcat(filename, ".log");
 }
-int WritetoFile(Timetable* timetables, int n, char* filename)//½«³µ´ÎĞÅÏ¢Ğ´ÈëÎÄ¼ş
+int WritetoFile(Timetable* timetables, int n, char* filename)//å°†è½¦æ¬¡ä¿¡æ¯å†™å…¥æ–‡ä»¶
 {
 	ofstream out;
 	out.open(filename);
@@ -512,7 +558,7 @@ int WritetoFile(Timetable* timetables, int n, char* filename)//½«³µ´ÎĞÅÏ¢Ğ´ÈëÎÄ¼
 		out << timetables[i].time << '\t';
 		out << timetables[i].fare << '\t';
 		out << timetables[i].max_number << '\t';
-		if (i < n - 1)//ÕâÀïÒªÅĞ¶ÏÊÇ·ñÎª×îºóÒ»ĞĞ£¬·ñÔòÎÄ¼ş»á²úÉúÂÒÂë
+		if (i < n - 1)//è¿™é‡Œè¦åˆ¤æ–­æ˜¯å¦ä¸ºæœ€åä¸€è¡Œï¼Œå¦åˆ™æ–‡ä»¶ä¼šäº§ç”Ÿä¹±ç 
 		{
 			out << timetables[i].sold_number << endl;
 		}
@@ -530,25 +576,25 @@ int QueryWindowSelect()
 	while (1)
 	{
 		system("cls");
-		cout << "\n                   ********** ³µ´ÎĞÅÏ¢²éÑ¯ **********\n\n";
-		cout << "                             1¡¢°´³µ´ÎºÅ²éÑ¯\n";
-		cout << "                             2¡¢°´ÖÕµãÕ¾²éÑ¯\n";
-		cout << "                             3¡¢ÍË ³ö  ²é Ñ¯\n";
+		cout << "\n                   ********** è½¦æ¬¡ä¿¡æ¯æŸ¥è¯¢ **********\n\n";
+		cout << "                             1ã€æŒ‰è½¦æ¬¡å·æŸ¥è¯¢\n";
+		cout << "                             2ã€æŒ‰ç»ˆç‚¹ç«™æŸ¥è¯¢\n";
+		cout << "                             3ã€é€€ å‡º  æŸ¥ è¯¢\n";
 		cout << "\n                   **********************************\n";
-		cout << "                     ÇëÑ¡Ôñ(1-3):";
+		cout << "                     è¯·é€‰æ‹©(1-3):";
 		cin >> num;
 		if (num >= 1 && num <= 3)
 			break;
 	}
-	return num;//·µ»ØÑ¡ÔñµÄÊı
+	return num;//è¿”å›é€‰æ‹©çš„æ•°
 }
-void Query(Timetable* timetables, int n)  //³µ´Î²éÑ¯
+void Query(Timetable* timetables, int n)  //è½¦æ¬¡æŸ¥è¯¢
 {
 	int num;
 	int i;
-	char no[10];//²éÑ¯³µ´ÎºÅ
-	char Last_station[10];//²éÑ¯ÖÕµãÕ¾
-	int b[100];//¼ÇÂ¼³µËùÔÚÎ»ÖÃ
+	char no[10];//æŸ¥è¯¢è½¦æ¬¡å·
+	char Last_station[10];//æŸ¥è¯¢ç»ˆç‚¹ç«™
+	int b[100];//è®°å½•è½¦æ‰€åœ¨ä½ç½®
 	while (1)
 	{
 		num = QueryWindowSelect();
@@ -557,12 +603,12 @@ void Query(Timetable* timetables, int n)  //³µ´Î²éÑ¯
 		case 1:
 
 		{
-			cout << "ÇëÊäÈëÄãÒª²éÑ¯µÄ³µ´ÎºÅ£º";
+			cout << "è¯·è¾“å…¥ä½ è¦æŸ¥è¯¢çš„è½¦æ¬¡å·ï¼š";
 			cin >> no;
-			i = find(timetables, n, no);//ÕÒµ½µÄ³µ´ÎÎ»ÖÃ
+			i = find(timetables, n, no);//æ‰¾åˆ°çš„è½¦æ¬¡ä½ç½®
 			if (i == -1)
 			{
-				cout << "Î´ÕÒµ½ÄãËù²éÑ¯µÄ³µ´Î" << endl; system("pause"); break;
+				cout << "æœªæ‰¾åˆ°ä½ æ‰€æŸ¥è¯¢çš„è½¦æ¬¡" << endl; system("pause"); break;
 			}
 			else
 			{
@@ -575,12 +621,12 @@ void Query(Timetable* timetables, int n)  //³µ´Î²éÑ¯
 		}
 		case 2:
 		{
-			cout << "ÇëÊäÈëÖÕµãÕ¾Ãû£º";
+			cout << "è¯·è¾“å…¥ç»ˆç‚¹ç«™åï¼š";
 			cin >> Last_station;
-			i = find(timetables, n, Last_station, b);//ÕÒµ½·ûºÏµÄ³µ´ÎÊıÁ¿
+			i = find(timetables, n, Last_station, b);//æ‰¾åˆ°ç¬¦åˆçš„è½¦æ¬¡æ•°é‡
 			if (i == -1)
 			{
-				cout << "Ã»ÓĞ¸ÃÖÕµãÕ¾µÄ³µ´Î" << endl; system("pause"); break;
+				cout << "æ²¡æœ‰è¯¥ç»ˆç‚¹ç«™çš„è½¦æ¬¡" << endl; system("pause"); break;
 			}
 			else
 			{
@@ -604,9 +650,9 @@ void Query(Timetable* timetables, int n)  //³µ´Î²éÑ¯
 	}
 	system("pause");
 }
-int InitializaionPassageMode(Timetable* timetables, char* LogFileName, char* filename)//ÅĞ¶Ï¶ÁÈ¡Ğ´ÈëÈÕÖ¾ÎÄ¼ş
+int InitializaionPassageMode(Timetable* timetables, char* LogFileName, char* filename)//åˆ¤æ–­è¯»å–å†™å…¥æ—¥å¿—æ–‡ä»¶
 {
-	int n = 0; //³µ´ÎÊıÁ¿
+	int n = 0; //è½¦æ¬¡æ•°é‡
 	ifstream infile;
 	infile.open(LogFileName);
 	if (!infile)
@@ -623,11 +669,11 @@ int InitializaionPassageMode(Timetable* timetables, char* LogFileName, char* fil
 		n = ReadFromFile(timetables, LogFileName);
 	}
 	infile.close();
-	return n;//·µ»ØÏÖÓĞ³µ´ÎÊı
+	return n;//è¿”å›ç°æœ‰è½¦æ¬¡æ•°
 }
-void SortbyTime(Timetable* timetables, int n)//½«³µ´ÎĞÅÏ¢½øĞĞÅÅĞò
+void SortbyTime(Timetable* timetables, int n)//å°†è½¦æ¬¡ä¿¡æ¯è¿›è¡Œæ’åº
 {
-	int i = 0, tt1, tt2, j = 0;//Ã°ÅİÅÅĞò
+	int i = 0, tt1, tt2, j = 0;//å†’æ³¡æ’åº
 	Timetable t1;
 	for (i = 0; i < n - 1; i++)
 	{
@@ -643,78 +689,78 @@ void SortbyTime(Timetable* timetables, int n)//½«³µ´ÎĞÅÏ¢½øĞĞÅÅĞò
 
 	}
 }
-void change(char* password)//¸ü¸ÄÃÜÂë
+void change(char* password)//æ›´æ”¹å¯†ç 
 {
-	char newpassword1[20];//¶¨ÒåÁ½¸öĞÂÃÜÂë£¬Íê³ÉÁ½¸öÃÜÂë±È¶Ô
+	char newpassword1[20];//å®šä¹‰ä¸¤ä¸ªæ–°å¯†ç ï¼Œå®Œæˆä¸¤ä¸ªå¯†ç æ¯”å¯¹
 	char newpassword2[20];
 	char pass[20];
 	int num, a, b;
-	cout << "ÄãÈ·¶¨Òª¸ü¸ÄÃÜÂëÂğ£¿(ÊäÈë1±íÊ¾È·¶¨£¬ÊäÈë2·µ»Ø)";
+	cout << "ä½ ç¡®å®šè¦æ›´æ”¹å¯†ç å—ï¼Ÿ(è¾“å…¥1è¡¨ç¤ºç¡®å®šï¼Œè¾“å…¥2è¿”å›)";
 	cin >> num;
 	if (num == 1)
 	{
-		cout << "ÇëÊäÈëÔ­Ê¼ÃÜÂë£º";
+		cout << "è¯·è¾“å…¥åŸå§‹å¯†ç ï¼š";
 		cin >> pass;
-		a = strcmp(password, pass);//Á½¸öÃÜÂë±È¶Ô
+		a = strcmp(password, pass);//ä¸¤ä¸ªå¯†ç æ¯”å¯¹
 		if (a == 0)
 		{
-			cout << "ÇëÊäÈëĞÂÃÜÂë£º";
+			cout << "è¯·è¾“å…¥æ–°å¯†ç ï¼š";
 			cin >> newpassword1;
-			cout << "ÇëÔÙ´ÎÊäÈëĞÂÃÜÂë£º";
+			cout << "è¯·å†æ¬¡è¾“å…¥æ–°å¯†ç ï¼š";
 			cin >> newpassword2;
 			b = strcmp(newpassword1, newpassword2);
 			if (b == 0)
 			{
-				strcpy(password, newpassword1);//Á½¸öÃÜÂë±È¶Ô
-				cout << "ÖØÖÃ³É¹¦" << endl;
+				strcpy(password, newpassword1);//ä¸¤ä¸ªå¯†ç æ¯”å¯¹
+				cout << "é‡ç½®æˆåŠŸ" << endl;
 			}
 			else
 			{
-				cout << "Á½´ÎÊäÈë²»Ò»Ñù" << endl;
+				cout << "ä¸¤æ¬¡è¾“å…¥ä¸ä¸€æ ·" << endl;
 			}
 		}
 		else
 		{
-			cout << "Ô­ÃÜÂëÊäÈë´íÎó" << endl;
+			cout << "åŸå¯†ç è¾“å…¥é”™è¯¯" << endl;
 		}
 	}
 	ofstream out;
-	out.open("ÃÜÂë.txt");
-	out << password;//½«¸ü¸ÄµÄÃÜÂëĞ´ÈëÎÄ¼ş
+	out.open("å¯†ç .txt");
+	out << password;//å°†æ›´æ”¹çš„å¯†ç å†™å…¥æ–‡ä»¶
 	out.close();
 
 }
-void passwordstart()//¶ÔÃÜÂë½øĞĞ³õÊ¼»¯£¬×î¿ªÊ¼µÄÃÜÂëÎª123
+void passwordstart()//å¯¹å¯†ç è¿›è¡Œåˆå§‹åŒ–ï¼Œæœ€å¼€å§‹çš„å¯†ç ä¸º123
 {
 	ofstream out;
-	out.open("ÃÜÂë.txt");
+	out.open("å¯†ç .txt");
 	char password[20] = "123";
 	out << password;
 	out.close();
 }
-void passwordin(char* password)//½«ÎÄ¼şÃÜÂë¶ÁÈë
+void passwordin(char* password)//å°†æ–‡ä»¶å¯†ç è¯»å…¥
 {
 	ifstream in;
-	in.open("ÃÜÂë.txt");
-	if (!in)//Èç¹ûÃ»ÓĞÕÒµ½Õâ¸öÎÄ¼ş£¬¾Í³õÊ¼»¯ÃÜÂëÎª123
+	in.open("å¯†ç .txt");
+	if (!in)//å¦‚æœæ²¡æœ‰æ‰¾åˆ°è¿™ä¸ªæ–‡ä»¶ï¼Œå°±åˆå§‹åŒ–å¯†ç ä¸º123
 	{
 		passwordstart();
 		password = "123";
 	}
 	else
 	{
-		while (!in.eof())//ÈôÕÒµ½ÃÜÂëÔò´ÓÖĞ¶ÁÈ¡ÃÜÂë
+		while (!in.eof())//è‹¥æ‰¾åˆ°å¯†ç åˆ™ä»ä¸­è¯»å–å¯†ç 
 		{
 			in >> password;
 		}
 	}
 	in.close();
 }
-int informationin(IDinformation* IDs)//³Ë¿ÍĞÅÏ¢¶ÁÈ¡
+int informationin(IDinformation* IDs)//ä¹˜å®¢ä¿¡æ¯è¯»å–
 {
 	int i = 0;
 	ifstream in;
-	in.open("³Ë¿Í¸öÈËĞÅÏ¢.txt");
+	in.open("ä¹˜å®¢ä¸ªäººä¿¡æ¯.txt");
 	if (!in)
 	{
 		i = 0;
@@ -730,17 +776,17 @@ int informationin(IDinformation* IDs)//³Ë¿ÍĞÅÏ¢¶ÁÈ¡
 			i++;
 		}
 	}
-	return i;//·µ»Ø³Ë¿ÍĞÅÏ¢ÊıÁ¿
+	return i;//è¿”å›ä¹˜å®¢ä¿¡æ¯æ•°é‡
 	in.close();
 
 }
-void writeIDs(IDinformation* IDs, int t)//½«³Ë¿ÍĞÅÏ¢Ğ´ÈëÎÄ¼ş
+void writeIDs(IDinformation* IDs, int t)//å°†ä¹˜å®¢ä¿¡æ¯å†™å…¥æ–‡ä»¶
 {
 	IDinformation IDnumber;
 	ifstream in;
 	int k = 0;
-	in.open("³Ë¿Í¸öÈËĞÅÏ¢.txt");
-	while (!in.eof())//ÅĞ¶ÏÏÖÓĞ³Ë¿ÍĞÅÏ¢Êı
+	in.open("ä¹˜å®¢ä¸ªäººä¿¡æ¯.txt");
+	while (!in.eof())//åˆ¤æ–­ç°æœ‰ä¹˜å®¢ä¿¡æ¯æ•°
 	{
 		in >> IDnumber.name;
 		in >> IDnumber.ID;
@@ -750,9 +796,9 @@ void writeIDs(IDinformation* IDs, int t)//½«³Ë¿ÍĞÅÏ¢Ğ´ÈëÎÄ¼ş
 	}
 	in.close();
 	ofstream out;
-	out.open("³Ë¿Í¸öÈËĞÅÏ¢.txt");
+	out.open("ä¹˜å®¢ä¸ªäººä¿¡æ¯.txt");
 	int i = 0;
-	for (i = 0; i < t; i++)//±£Ö¤ĞÂÔö³Ë¿ÍÖ®Ç°µÄÊı¾İ²»ÄÜ¸Ä±ä£¬Ö®ºóµÄÊı¾İ¿ÉÒÔ¸Ä±ä
+	for (i = 0; i < t; i++)//ä¿è¯æ–°å¢ä¹˜å®¢ä¹‹å‰çš„æ•°æ®ä¸èƒ½æ”¹å˜ï¼Œä¹‹åçš„æ•°æ®å¯ä»¥æ”¹å˜
 	{
 		if (i < k)
 		{
@@ -767,18 +813,18 @@ void writeIDs(IDinformation* IDs, int t)//½«³Ë¿ÍĞÅÏ¢Ğ´ÈëÎÄ¼ş
 			out << IDs[i].ID << '\t';
 			out << IDs[i].no1 << '\t';
 			IDs[i].buydata[0] = '\0';
-			struct tm* local;       //struct tm Ê±¼ä½á¹¹ÌåÀàĞÍ
-			time_t t1;				//°Ñµ±Ç°Ê±¼ä¸øt
+			struct tm* local;       //struct tm æ—¶é—´ç»“æ„ä½“ç±»å‹
+			time_t t1;				//æŠŠå½“å‰æ—¶é—´ç»™t
 			t1 = time(NULL);
 			local = localtime(&t1);
-			char year[5], month[3], day[3], hour[3], min[3], sec[3];	//½«ÄêÔÂÈÕ·Ö±ğ×ª»»³É×Ö·û´®ĞÍ
+			char year[5], month[3], day[3], hour[3], min[3], sec[3];	//å°†å¹´æœˆæ—¥åˆ†åˆ«è½¬æ¢æˆå­—ç¬¦ä¸²å‹
 			inttostr(1900 + local->tm_year, year);
 			inttostr(1 + local->tm_mon, month);
 			inttostr(local->tm_mday, day);
 			inttostr(local->tm_hour, hour);
 			inttostr(local->tm_min, min);
 			inttostr(local->tm_sec, sec);
-			strcat(IDs[i].buydata, year);			//Éú³É¹ºÆ±Ê±¼ä
+			strcat(IDs[i].buydata, year);			//ç”Ÿæˆè´­ç¥¨æ—¶é—´
 			strcat(IDs[i].buydata, "-");
 			strcat(IDs[i].buydata, month);
 			strcat(IDs[i].buydata, "-");
@@ -789,7 +835,7 @@ void writeIDs(IDinformation* IDs, int t)//½«³Ë¿ÍĞÅÏ¢Ğ´ÈëÎÄ¼ş
 			strcat(IDs[i].buydata, min);
 			strcat(IDs[i].buydata, ":");
 			strcat(IDs[i].buydata, sec);
-			if (i < t - 1)//ÅĞ¶ÏÊÇ·ñÎª×îºóÒ»ĞĞ
+			if (i < t - 1)//åˆ¤æ–­æ˜¯å¦ä¸ºæœ€åä¸€è¡Œ
 			{
 				out << IDs[i].buydata << endl;
 			}
@@ -802,10 +848,10 @@ void writeIDs(IDinformation* IDs, int t)//½«³Ë¿ÍĞÅÏ¢Ğ´ÈëÎÄ¼ş
 	}
 	out.close();
 }
-void showinformation(IDinformation* IDs)//ÏÔÊ¾³Ë¿ÍĞÅÏ¢
+void showinformation(IDinformation* IDs)//æ˜¾ç¤ºä¹˜å®¢ä¿¡æ¯
 {
 	ifstream in;
-	in.open("³Ë¿Í¸öÈËĞÅÏ¢.txt");
+	in.open("ä¹˜å®¢ä¸ªäººä¿¡æ¯.txt");
 	int i = 0;
 	while (!in.eof())
 	{
@@ -814,9 +860,9 @@ void showinformation(IDinformation* IDs)//ÏÔÊ¾³Ë¿ÍĞÅÏ¢
 		in >> IDs[i].no1;
 		in >> IDs[i].buydata;
 		i++;
-	}//Í³¼Æ³Ë¿ÍÊıÁ¿
-	cout << setw(10) << "ĞÕÃû" << setw(15) << "IDºÅ" << setw(10) << "³µ´ÎºÅ" << setw(25) << "¹ºÆ±Ê±¼ä" << endl;
-	for (int j = 0; j < i; j++)//Êä³ö³Ë¿ÍÊı
+	}//ç»Ÿè®¡ä¹˜å®¢æ•°é‡
+	cout << setw(10) << "å§“å" << setw(15) << "IDå·" << setw(10) << "è½¦æ¬¡å·" << setw(25) << "è´­ç¥¨æ—¶é—´" << endl;
+	for (int j = 0; j < i; j++)//è¾“å‡ºä¹˜å®¢æ•°
 	{
 		cout << setw(10) << IDs[j].name;
 		cout << setw(15) << IDs[j].ID;
@@ -825,48 +871,48 @@ void showinformation(IDinformation* IDs)//ÏÔÊ¾³Ë¿ÍĞÅÏ¢
 	}
 
 }
-void PassagerMode(Timetable* timetables, IDinformation* IDs, int t, char* filename) //¹Ë¿Í¹¦ÄÜ
+void PassagerMode(Timetable* timetables, IDinformation* IDs, int t, char* filename) //é¡¾å®¢åŠŸèƒ½
 {
-	char LogFileName[200];    //´æ·ÅÈÕÖ¾ÎÄ¼şÃû¡£
+	char LogFileName[200];    //å­˜æ”¾æ—¥å¿—æ–‡ä»¶åã€‚
 	int n;
-	GenerateLogFileName(LogFileName);//¸ù¾İµ±Ç°ÈÕÆÚÉú³ÉÈÕÖ¾ÎÄ¼şÃû
+	GenerateLogFileName(LogFileName);//æ ¹æ®å½“å‰æ—¥æœŸç”Ÿæˆæ—¥å¿—æ–‡ä»¶å
 	n = InitializaionPassageMode(timetables, LogFileName, filename);
 	int PassagerChoice;
 	while (1)
 	{
 		switch (PassagerChoice = PassagerWindowSelect())
 		{
-		case 1: Query(timetables, n); system("pause"); break;//³µ´ÎĞÅÏ¢²éÑ¯
-		case 2: t = TicketOrder(timetables, n, IDs, t); WritetoFile(timetables, n, LogFileName); writeIDs(IDs, t); system("pause"); break;  //¹ºÆ±£¬²¢¸ü¸ÄÎÄ¼şĞÅÏ¢
-		case 3: TicketDelete(timetables, n); WritetoFile(timetables, n, LogFileName); system("pause"); break;//ÍËÆ±£¬²¢¸ü¸ÄÎÄ¼şĞÅÏ¢
-		case 4: WritetoFile(timetables, n, LogFileName); 	return;//·µ»ØÉÏ¼¶²Ëµ¥
+		case 1: Query(timetables, n); system("pause"); break;//è½¦æ¬¡ä¿¡æ¯æŸ¥è¯¢
+		case 2: t = TicketOrder(timetables, n, IDs, t); WritetoFile(timetables, n, LogFileName); writeIDs(IDs, t); system("pause"); break;  //è´­ç¥¨ï¼Œå¹¶æ›´æ”¹æ–‡ä»¶ä¿¡æ¯
+		case 3: TicketDelete(timetables, n); WritetoFile(timetables, n, LogFileName); system("pause"); break;//é€€ç¥¨ï¼Œå¹¶æ›´æ”¹æ–‡ä»¶ä¿¡æ¯
+		case 4: WritetoFile(timetables, n, LogFileName); 	return;//è¿”å›ä¸Šçº§èœå•
 		}
 	}
 }
-void AdminMode(Timetable* timetables, char* password, char* filename, IDinformation* IDs)  //¹ÜÀíÔ±¹¦ÄÜ
+void AdminMode(Timetable* timetables, char* password, char* filename, IDinformation* IDs)  //ç®¡ç†å‘˜åŠŸèƒ½
 {
 	int n;
-	Signin(password);  //µÇÂ¼
+	Signin(password);  //ç™»å½•
 	n = ReadFromFile(timetables, "bus.txt");
 	while (1)
 	{
 		int AdminChoice = AdminWindowSelect();
 		switch (AdminChoice)
 		{
-		case 1:	n = AddBus(timetables, n); WritetoFile(timetables, n, filename); system("pause"); break;	//Ôö¼Ó³µ´ÎĞÅÏ¢,²¢¼°Ê±Ğ´µ½ÎÄ¼şÖĞ
-		case 2:	ShowTimetable(timetables, n); system("pause"); break;	//ä¯ÀÀÊ±¿Ì±í
-		case 3:	Query(timetables, n); system("pause"); break;	//³µ´ÎĞÅÏ¢²éÑ¯	   			
-		case 4:	n = DelBus(timetables, n); system("pause"); WritetoFile(timetables, n, filename); break;//×¢Ïú³µ´Î,²¢¼°Ê±Ğ´µ½ÎÄ¼şÖĞ
-		case 5: showinformation(IDs); system("pause"); break;//ÏÔÊ¾³Ë¿ÍĞÅÏ¢
-		case 6: change(password); system("pause"); break;//¸ü¸ÄÃÜÂë
-		case 7: WritetoFile(timetables, n, filename); return;//·µ»ØÉÏ¼¶²Ëµ¥
+		case 1:	n = AddBus(timetables, n); WritetoFile(timetables, n, filename); system("pause"); break;	//å¢åŠ è½¦æ¬¡ä¿¡æ¯,å¹¶åŠæ—¶å†™åˆ°æ–‡ä»¶ä¸­
+		case 2:	ShowTimetable(timetables, n); system("pause"); break;	//æµè§ˆæ—¶åˆ»è¡¨
+		case 3:	Query(timetables, n); system("pause"); break;	//è½¦æ¬¡ä¿¡æ¯æŸ¥è¯¢	   			
+		case 4:	n = DelBus(timetables, n); system("pause"); WritetoFile(timetables, n, filename); break;//æ³¨é”€è½¦æ¬¡,å¹¶åŠæ—¶å†™åˆ°æ–‡ä»¶ä¸­
+		case 5: showinformation(IDs); system("pause"); break;//æ˜¾ç¤ºä¹˜å®¢ä¿¡æ¯
+		case 6: change(password); system("pause"); break;//æ›´æ”¹å¯†ç 
+		case 7: WritetoFile(timetables, n, filename); return;//è¿”å›ä¸Šçº§èœå•
 		}
 	}
 }
-int Quit()//ÍË³öÏµÍ³
+int Quit()//é€€å‡ºç³»ç»Ÿ
 {
-	cin.sync(); //Çå¿ÕÊäÈë»º³åÇø
-	cout << "ÍË³öÏµÍ³Âğ(y/n)?";
+	cin.sync(); //æ¸…ç©ºè¾“å…¥ç¼“å†²åŒº
+	cout << "é€€å‡ºç³»ç»Ÿå—(y/n)?";
 	char ans;
 	cin >> ans;
 	if (ans == 'Y' || ans == 'y')
@@ -877,19 +923,19 @@ int main()
 {
 	int UserChoice;
 	int t;
-	system("color 3d");//¸ü¸Ä²Ù×÷½çÃæÑÕÉ«
+	system("color 3d");//æ›´æ”¹æ“ä½œç•Œé¢é¢œè‰²
 	Timetable timetables[100];
 	IDinformation IDs[1000];
-	char password[20];//¶¨ÒåÃÜÂëÊı×é
+	char password[20];//å®šä¹‰å¯†ç æ•°ç»„
 	passwordin(password);
-	t = informationin(IDs);//³Ë¿ÍĞÅÏ¢Êı
+	t = informationin(IDs);//ä¹˜å®¢ä¿¡æ¯æ•°
 	while (1)
 	{
 		switch (UserChoice = MainWindowSelect())
 		{
-		case 1:  AdminMode(timetables, password, "bus.txt", IDs); break;	    //¹ÜÀíÔ±Ä£Ê½
-		case 2:  PassagerMode(timetables, IDs, t, "bus.txt"); break;	//¹Ë¿ÍÄ£Ê½	
-		case 3:  if (Quit() != 1) continue;				    //ÍË³ö
+		case 1:  AdminMode(timetables, password, "bus.txt", IDs); break;	    //ç®¡ç†å‘˜æ¨¡å¼
+		case 2:  PassagerMode(timetables, IDs, t, "bus.txt"); break;	//é¡¾å®¢æ¨¡å¼	
+		case 3:  if (Quit() != 1) continue;				    //é€€å‡º
 		}
 		if (UserChoice == 3) break;
 	}
