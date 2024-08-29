@@ -136,26 +136,7 @@ int AddBus(Timetable* timetables, int n)     //增加车次，将更改的信息
 	}
 	return (n + 1);//返回增加了一趟车后现有的车辆数
 }
-int find(Timetable* timetables, int n, char* no)	  //按车次查找
-{
-	int i = 0, k=1;//i是计数，k是判断两车次号是否一致
-	for (i = 0; i < n; i++)
-	{
-		k = strcmp(timetables[i].no, no);
-		if (k == 0)
-		{
-			break;
-		}
-	}
-	if (k == 0)
-	{
-		return i;//返回两车次号一致的车次所在的位置
-	}
-	else
-	{
-		return -1;//返回-1，表示未找到
-	}
-}
+
 int find(Timetable* timetables, int n, char* Last_station, int* b)  //按终点站查找  
 {
 	int j = 0;  //存放同一终点站车次数
@@ -205,6 +186,27 @@ int DelBus(Timetable* timetables, int n)   //删除车次,并更新车次文件
 		}
 	}
 	return n;//返回现有车次数量
+}
+
+int find(Timetable* timetables, int n, char* no)	  //按车次查找
+{
+	int i = 0, k=1;//i是计数，k是判断两车次号是否一致
+	for (i = 0; i < n; i++)
+	{
+		k = strcmp(timetables[i].no, no);
+		if (k == 0)
+		{
+			break;
+		}
+	}
+	if (k == 0)
+	{
+		return i;//返回两车次号一致的车次所在的位置
+	}
+	else
+	{
+		return -1;//返回-1，表示未找到
+	}
 }
 int AdminWindowSelect() 				//管理员菜单界面
 {
