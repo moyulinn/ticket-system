@@ -257,70 +257,6 @@ void CustomerWidget::on_pBtnExitSys_clicked()
     exit(0);
 }
 
-void CustomerWidget::showBusInfo(int *ids,int n)
-{
-    ui->tableWidget->clear();
-    ui->tableWidget->setColumnCount(10);
-    ui->tableWidget->setRowCount(n);
-    QStringList headers;
-    headers << "班次" << "时间(小时)" << "时间(分钟)" <<"起点" << "终点" << "时长" << "票价" << "额定量" << "已售票" << "是否发车";
-    ui->tableWidget->setHorizontalHeaderLabels(headers);
-    for(int row = 0; row < n && row < m_iBusNum; ++row) {
-        for(int column = 0; column < 10; ++column) {
-            QTableWidgetItem *item = nullptr;
-            switch(column)
-            {
-            case 0:
-                item = new QTableWidgetItem(m_pTimetables[ids[row]].no.c_str());
-                break;
-            case 1:
-                item = new QTableWidgetItem(QString::number(m_pTimetables[ids[row]].hour));
-                break;
-            case 2:
-                item = new QTableWidgetItem(QString::number(m_pTimetables[ids[row]].minute));
-                break;
-            case 3:
-                item = new QTableWidgetItem(m_pTimetables[ids[row]].Starting_station.c_str());
-                break;
-            case 4:
-                item = new QTableWidgetItem(m_pTimetables[ids[row]].Last_station.c_str());
-                break;
-            case 5:
-                item = new QTableWidgetItem(QString::number(m_pTimetables[ids[row]].time));
-                break;
-            case 6:
-                item = new QTableWidgetItem(QString::number(m_pTimetables[ids[row]].fare));
-                break;
-            case 7:
-                item = new QTableWidgetItem(QString::number(m_pTimetables[ids[row]].max_number));
-                break;
-            case 8:
-                item = new QTableWidgetItem(QString::number(m_pTimetables[ids[row]].sold_number));
-                break;
-            case 9:
-            {
-                //判断是否发车
-                struct tm* local;       //struct tm 时间结构体类型
-                time_t t;				//把当前时间给t
-                t = time(NULL);
-                local = localtime(&t);      //获取当前系统时间
-                if ((local->tm_hour * 60 + local->tm_min) < (m_pTimetables[ids[row]].hour * 60 + m_pTimetables[ids[row]].minute))
-                {
-                    item = new QTableWidgetItem("未发车");
-                }
-                else
-                {
-                    item = new QTableWidgetItem("已发车");
-                }
-            }
-            break;
-
-            }
-            item->setTextAlignment(Qt::AlignCenter);
-            ui->tableWidget->setItem(row, column, item);
-        }
-    }
-}
 
 
 void CustomerWidget::on_pBtnpageFindBus_clicked()
@@ -453,6 +389,70 @@ void CustomerWidget::on_pBtnpageBookTicket_clicked()
     }
 }
 
+void CustomerWidget::showBusInfo(int *ids,int n)
+{
+    ui->tableWidget->clear();
+    ui->tableWidget->setColumnCount(10);
+    ui->tableWidget->setRowCount(n);
+    QStringList headers;
+    headers << "班次" << "时间(小时)" << "时间(分钟)" <<"起点" << "终点" << "时长" << "票价" << "额定量" << "已售票" << "是否发车";
+    ui->tableWidget->setHorizontalHeaderLabels(headers);
+    for(int row = 0; row < n && row < m_iBusNum; ++row) {
+        for(int column = 0; column < 10; ++column) {
+            QTableWidgetItem *item = nullptr;
+            switch(column)
+            {
+            case 0:
+                item = new QTableWidgetItem(m_pTimetables[ids[row]].no.c_str());
+                break;
+            case 1:
+                item = new QTableWidgetItem(QString::number(m_pTimetables[ids[row]].hour));
+                break;
+            case 2:
+                item = new QTableWidgetItem(QString::number(m_pTimetables[ids[row]].minute));
+                break;
+            case 3:
+                item = new QTableWidgetItem(m_pTimetables[ids[row]].Starting_station.c_str());
+                break;
+            case 4:
+                item = new QTableWidgetItem(m_pTimetables[ids[row]].Last_station.c_str());
+                break;
+            case 5:
+                item = new QTableWidgetItem(QString::number(m_pTimetables[ids[row]].time));
+                break;
+            case 6:
+                item = new QTableWidgetItem(QString::number(m_pTimetables[ids[row]].fare));
+                break;
+            case 7:
+                item = new QTableWidgetItem(QString::number(m_pTimetables[ids[row]].max_number));
+                break;
+            case 8:
+                item = new QTableWidgetItem(QString::number(m_pTimetables[ids[row]].sold_number));
+                break;
+            case 9:
+            {
+                //判断是否发车
+                struct tm* local;       //struct tm 时间结构体类型
+                time_t t;				//把当前时间给t
+                t = time(NULL);
+                local = localtime(&t);      //获取当前系统时间
+                if ((local->tm_hour * 60 + local->tm_min) < (m_pTimetables[ids[row]].hour * 60 + m_pTimetables[ids[row]].minute))
+                {
+                    item = new QTableWidgetItem("未发车");
+                }
+                else
+                {
+                    item = new QTableWidgetItem("已发车");
+                }
+            }
+            break;
+
+            }
+            item->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidget->setItem(row, column, item);
+        }
+    }
+}
 
 
 void CustomerWidget::on_pBtnDelBus_clicked()
