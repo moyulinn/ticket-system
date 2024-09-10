@@ -10,7 +10,7 @@
 #include <conio.h>
 #include <QMessageBox>
 #include "datastructrue.h"
-//using namespace std;
+
 #pragma execution_character_set("utf-8")
 
 AdministratorWidget::AdministratorWidget(QWidget *parent):QWidget(parent),ui(new Ui::AdministratorWidget)
