@@ -197,24 +197,7 @@ int CustomerWidget::findByBusDestination(QString lastStation,int*b)
     return -1; //没有查到相应终点站的车次时返回值-1
 }
 
-void CustomerWidget::SortbyTime()//将车次信息进行排序
-{
-    int i = 0, tt1, tt2, j = 0;//冒泡排序
-    Timetable t1;
-    for (i = 0; i < m_iBusNum - 1; i++)
-    {
-        for (j = 0; j < m_iBusNum - 1 - i; j++)
-        {
-            tt1 = m_pTimetables[j].hour * 60 + m_pTimetables[j].minute;
-            tt2 = m_pTimetables[j + 1].hour * 60 + m_pTimetables[j+1].minute;
-            if (tt1 > tt2)
-            {
-                t1 = m_pTimetables[j]; m_pTimetables[j] = m_pTimetables[j + 1]; m_pTimetables[j + 1] = t1;
-            }
-        }
 
-    }
-}
 
 
 int CustomerWidget::StopSerive(QString no) //判断是否停止售票或退票，0:可以，1：不可以
@@ -258,7 +241,24 @@ void CustomerWidget::on_pBtnExitSys_clicked()
 }
 
 
+void CustomerWidget::SortbyTime()//将车次信息进行排序
+{
+    int i = 0, tt1, tt2, j = 0;//冒泡排序
+    Timetable t1;
+    for (i = 0; i < m_iBusNum - 1; i++)
+    {
+        for (j = 0; j < m_iBusNum - 1 - i; j++)
+        {
+            tt1 = m_pTimetables[j].hour * 60 + m_pTimetables[j].minute;
+            tt2 = m_pTimetables[j + 1].hour * 60 + m_pTimetables[j+1].minute;
+            if (tt1 > tt2)
+            {
+                t1 = m_pTimetables[j]; m_pTimetables[j] = m_pTimetables[j + 1]; m_pTimetables[j + 1] = t1;
+            }
+        }
 
+    }
+}
 void CustomerWidget::on_pBtnpageFindBus_clicked()
 {
     QString no = ui->lineEditpageFindBus->text();
