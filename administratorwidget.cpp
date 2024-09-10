@@ -37,36 +37,7 @@ void AdministratorWidget::init(Timetable* timetables, int m_iBusNum,std::string 
     m_iPassengerNum = iDsNum;
 }
 
-void AdministratorWidget::ReadFromFile(const char* filename)//从文件读取车次信息
-{
-    int i = 0;  //车次数量
-    std::ifstream infile;
-    infile.open(filename);
-    if (!infile)
-    {
-        //QMessageBox::critical(this,"错误","车次文件打开错误，系统自动退出");
-        exit(1);
-    }
-    else
-    {
-        while (!infile.eof())
-        {
-            infile >> m_pTimetables[i].no;
-            infile >> m_pTimetables[i].hour;
-            infile >> m_pTimetables[i].minute;
-            infile >> m_pTimetables[i].Starting_station;
-            infile >> m_pTimetables[i].Last_station;
-            infile >> m_pTimetables[i].time;
-            infile >> m_pTimetables[i].fare;
-            infile >> m_pTimetables[i].max_number;
-            infile >> m_pTimetables[i].sold_number;
-            i++;
-        }
-        //return i;//返回现有车次的数量
-    }
-    infile.close();
-    m_iBusNum = i;
-}
+
 
 int AdministratorWidget::findByBusNum(QString no)
 {
@@ -369,6 +340,38 @@ void AdministratorWidget::SortbyTime()
         }
 
     }
+}
+
+
+void AdministratorWidget::ReadFromFile(const char* filename)//从文件读取车次信息
+{
+    int i = 0;  //车次数量
+    std::ifstream infile;
+    infile.open(filename);
+    if (!infile)
+    {
+        //QMessageBox::critical(this,"错误","车次文件打开错误，系统自动退出");
+        exit(1);
+    }
+    else
+    {
+        while (!infile.eof())
+        {
+            infile >> m_pTimetables[i].no;
+            infile >> m_pTimetables[i].hour;
+            infile >> m_pTimetables[i].minute;
+            infile >> m_pTimetables[i].Starting_station;
+            infile >> m_pTimetables[i].Last_station;
+            infile >> m_pTimetables[i].time;
+            infile >> m_pTimetables[i].fare;
+            infile >> m_pTimetables[i].max_number;
+            infile >> m_pTimetables[i].sold_number;
+            i++;
+        }
+        //return i;//返回现有车次的数量
+    }
+    infile.close();
+    m_iBusNum = i;
 }
 
 void AdministratorWidget::showBusInfo()
