@@ -1,7 +1,4 @@
-﻿/*
- *  @file administratorwidget.h
- *  @brief 管理员功能页面
-*/
+
 #ifndef ADMINISTRATORWIDGET__H__
 #define ADMINISTRATORWIDGET__H__
 
