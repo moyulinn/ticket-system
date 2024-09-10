@@ -1,11 +1,4 @@
-﻿/*
- *  @file customerwidget.h
- *  @brief 乘客功能页面
-*/
-/*
- *  @file administratorwidget.h
- *  @brief 管理员功能页面
-*/
+
 #ifndef CUSTOMERWIDGET_H
 #define CUSTOMERWIDGET_H
 
@@ -86,5 +79,3 @@ private:
     // @brief 存放乘客信息的文件路径
     std::string m_szPassengerFilePath;
 };
-
-#endif // CUSTOMERWIDGET_H
