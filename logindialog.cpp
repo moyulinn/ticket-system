@@ -28,41 +28,7 @@ LoginDialog::~LoginDialog()
     //painter.drawPixmap(0,0,width(),height(),Qpixmap(":/new/prefix1/bj.png"))
 //}
 
-void LoginDialog::passWordIn(QString filePath)
-{
-    //密码文件后缀目前只有.txt
-    if(!filePath.endsWith(".txt"))
-        filePath += ".txt";
 
-    QFile file(filePath);
-    if(!file.open(QIODevice::ReadOnly|QIODevice::Text))
-    {
-        // 如果没有找到这个文件则，密码初始化为123
-        m_szPassWordFilePath = filePath;
-        //创建新的密码文件，并将密码写入文件
-        passwordStart();
-        m_szPassWord = "123";
-        return;
-    }
-    else
-    {
-        QTextStream text_stream(&file);
-        QString sz_line;
-        //循环读取密码文件每一行，目前只取最后一行
-        while(!text_stream.atEnd())
-        {
-            sz_line = text_stream.readLine();
-        }
-        //将读取出来的密码进行赋值
-        if(sz_line.size())
-            m_szPassWord = sz_line;
-        else
-            m_szPassWord = "123";
-        file.close();
-        m_szPassWordFilePath = filePath;
-    }
-
-}
 
 void LoginDialog::passwordStart()
 {
@@ -107,7 +73,41 @@ void LoginDialog::on_pBtnClientEnter_clicked()
     accept();
 }
 
+void LoginDialog::passWordIn(QString filePath)
+{
+    //密码文件后缀目前只有.txt
+    if(!filePath.endsWith(".txt"))
+        filePath += ".txt";
 
+    QFile file(filePath);
+    if(!file.open(QIODevice::ReadOnly|QIODevice::Text))
+    {
+        // 如果没有找到这个文件则，密码初始化为123
+        m_szPassWordFilePath = filePath;
+        //创建新的密码文件，并将密码写入文件
+        passwordStart();
+        m_szPassWord = "123";
+        return;
+    }
+    else
+    {
+        QTextStream text_stream(&file);
+        QString sz_line;
+        //循环读取密码文件每一行，目前只取最后一行
+        while(!text_stream.atEnd())
+        {
+            sz_line = text_stream.readLine();
+        }
+        //将读取出来的密码进行赋值
+        if(sz_line.size())
+            m_szPassWord = sz_line;
+        else
+            m_szPassWord = "123";
+        file.close();
+        m_szPassWordFilePath = filePath;
+    }
+
+}
 void LoginDialog::on_pBtnAdminEnter_clicked()
 {
     //获取界面上的账号和密码
